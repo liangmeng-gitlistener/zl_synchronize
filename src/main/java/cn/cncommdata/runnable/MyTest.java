@@ -1,14 +1,12 @@
 package cn.cncommdata.runnable;
 
 import cn.cncommdata.dao.mysql.TCronTriggerDao;
-import cn.cncommdata.entity.TCronTrigger;
 import cn.cncommdata.enums.TaskEnum;
+import cn.cncommdata.runnable.utils.RunnableUtil;
 import cn.cncommdata.utils.ApplicationContextProvider;
 import cn.hutool.core.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
 
 @Slf4j
 @Component
@@ -24,8 +22,6 @@ public class MyTest implements Runnable {
 
         //  反写数据库执行时间
         this.cronTriggerDao = ApplicationContextProvider.getBean(TCronTriggerDao.class);
-        TCronTrigger cronTrigger = cronTriggerDao.queryById(TaskEnum.TEST_TASK.getTaskId());
-        cronTrigger.setLastRunTime(DateUtil.date());
-        cronTriggerDao.update(cronTrigger);
+        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.TEST_TASK.getTaskId());
     }
 }

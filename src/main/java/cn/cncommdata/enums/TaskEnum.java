@@ -3,8 +3,7 @@ package cn.cncommdata.enums;
 import lombok.Getter;
 
 /**
- * 商品上下架状态
- * Created by 廖师兄
+ * 定时任务ID及描述
  * 2017-12-09 22:00
  */
 @Getter
