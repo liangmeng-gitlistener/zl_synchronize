@@ -1,11 +1,14 @@
 package cn.cncommdata.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
+ * 没用到，先冗余到这里后面可能会用到
  * 2017-12-10 23:00
  */
 @Getter
+@AllArgsConstructor
 public enum ResultEnum {
 
     PRODUCT_NOT_EXIST(1, "商品不存在"),
@@ -13,11 +16,5 @@ public enum ResultEnum {
     ;
 
     private Integer code;
-
     private String message;
-
-    ResultEnum(Integer code, String message) {
-        this.code = code;
-        this.message = message;
-    }
 }
