@@ -3,8 +3,8 @@ package cn.cncommdata.dao.mysql;
 import cn.cncommdata.entity.TCronTrigger;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.context.annotation.Bean;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -66,4 +66,11 @@ public interface TCronTriggerDao {
      */
     int deleteById(Long id);
 
+    /**
+     * 通过主键修改LastRunTime字段
+     * @param lastRunTime   上次执行时间
+     * @param id            主键
+     * @return              影响行数
+     */
+    int updateLastRunTimeById(Date lastRunTime, Long id);
 }

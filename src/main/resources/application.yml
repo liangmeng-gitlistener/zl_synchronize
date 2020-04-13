@@ -17,6 +17,22 @@ spring:
     username: ${mysql_username:root}
     password: ${mysql_password:root}
     type: com.alibaba.druid.pool.DruidDataSource
+    # 初始化大小，最小，最大
+    initial-size: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+    filters: stat,wall,log4j
 
   jackson:
     property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
@@ -29,3 +45,8 @@ logging:
 mybatis:
   mapper-locations: classpath:/mapper/*Dao.xml
   type-aliases-package: cn.cncommdata.entity
+
+druid:
+  login:
+    user_name: root
+    password: root

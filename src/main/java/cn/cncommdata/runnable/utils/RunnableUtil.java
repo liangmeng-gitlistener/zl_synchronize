@@ -1,7 +1,6 @@
 package cn.cncommdata.runnable.utils;
 
 import cn.cncommdata.dao.mysql.TCronTriggerDao;
-import cn.cncommdata.entity.TCronTrigger;
 import cn.cncommdata.enums.TaskEnum;
 import cn.hutool.core.date.DateUtil;
 
@@ -12,8 +11,6 @@ public class RunnableUtil {
      * @param taskId            定时任务ID
      */
     public static int UpdateLastRunTime(TCronTriggerDao cronTriggerDao, Long taskId){
-        TCronTrigger cronTrigger = cronTriggerDao.queryById(TaskEnum.TEST_TASK.getTaskId());
-        cronTrigger.setLastRunTime(DateUtil.date());
-        return cronTriggerDao.update(cronTrigger);
+        return cronTriggerDao.updateLastRunTimeById(DateUtil.date(), TaskEnum.TEST_TASK.getTaskId());
     }
 }
