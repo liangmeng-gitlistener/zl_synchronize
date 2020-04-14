@@ -31,4 +31,5 @@ build/
 .vscode/
 
 ### 日志目录 ###
-LOG_PATH_IS_UNDEFINED/
+LOG_PATH_IS_UNDEFINED/workspace
+workspace

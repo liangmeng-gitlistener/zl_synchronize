@@ -45,8 +45,3 @@ logging:
 mybatis:
   mapper-locations: classpath:/mapper/*Dao.xml
   type-aliases-package: cn.cncommdata.entity
-
-druid:
-  login:
-    user_name: root
-    password: root

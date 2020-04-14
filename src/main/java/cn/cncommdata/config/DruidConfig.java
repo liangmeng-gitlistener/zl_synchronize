@@ -1,9 +1,10 @@
 package cn.cncommdata.config;
 
+import cn.cncommdata.config.entity.DruidLoginConfig;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -21,11 +22,8 @@ import java.util.Map;
 @Configuration
 public class DruidConfig {
 
-    @Value("${druid.login.user_name}")
-    private String userName;
-
-    @Value("${druid.login.password}")
-    private String password;
+    @Autowired
+    private DruidLoginConfig druidLoginConfig;
 
     /**
      * 主要实现web监控的配置处理
@@ -43,8 +41,8 @@ public class DruidConfig {
         servletRegistrationBean.setServlet(new StatViewServlet());
         servletRegistrationBean.addUrlMappings("/druid/*");
         Map<String, String> initParameters = new HashMap<>();
-        initParameters.put("loginUsername", userName);// 用户名
-        initParameters.put("loginPassword", password);// 密码
+        initParameters.put("loginUsername", druidLoginConfig.getUserName());// 用户名
+        initParameters.put("loginPassword", druidLoginConfig.getPassword());// 密码
         initParameters.put("resetEnable", "false");// 禁用HTML页面上的“Reset All”功能
         servletRegistrationBean.setInitParameters(initParameters);
         return servletRegistrationBean;
