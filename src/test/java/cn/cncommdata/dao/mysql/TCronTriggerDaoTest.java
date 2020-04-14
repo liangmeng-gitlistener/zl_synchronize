@@ -40,6 +40,6 @@ class TCronTriggerDaoTest extends ZlSynchronizeApplicationTests {
     void updateLastRunTimeById(){
         String test = "2017-03-01 22:33:23";
         Date lastRunTime = DateUtil.parse(test);
-        tCronTriggerDao.updateLastRunTimeById(lastRunTime, 2L);
+        tCronTriggerDao.updateLastRunTimeById(lastRunTime, 1L);
     }
 }

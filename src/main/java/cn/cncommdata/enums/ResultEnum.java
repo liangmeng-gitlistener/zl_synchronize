@@ -5,7 +5,6 @@ import lombok.Getter;
 
 /**
  * 没用到，先冗余到这里后面可能会用到
- * 2017-12-10 23:00
  */
 @Getter
 @AllArgsConstructor

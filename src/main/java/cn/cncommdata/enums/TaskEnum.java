@@ -5,7 +5,6 @@ import lombok.Getter;
 
 /**
  * 定时任务ID及描述
- * 2017-12-09 22:00
  */
 @Getter
 @AllArgsConstructor
