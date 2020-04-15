@@ -1,5 +1,4 @@
 package cn.cncommdata.config;
-import	java.util.ArrayList;
 
 import cn.cncommdata.dao.mysql.TCronTriggerDao;
 import cn.cncommdata.entity.TCronTrigger;
@@ -20,7 +19,7 @@ public class DynamicScheduleTask implements CommandLineRunner {
     private TCronTriggerDao cronTriggerDao;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
         List<TCronTrigger> cronTriggers = cronTriggerDao.queryAll(null);
         List<TCronTrigger> dataCronTriggers= scheduleConfig.startCron(cronTriggers);
         dataCronTriggers.forEach(cronTriggerDao::update);

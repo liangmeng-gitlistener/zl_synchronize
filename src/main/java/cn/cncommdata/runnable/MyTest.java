@@ -21,6 +21,7 @@ public class MyTest implements Runnable {
                 Thread.currentThread().getName());
 
         //  反写数据库执行时间
+        //  此处仅为获取spring中的dao对象（定时任务中无法通过@Autowired来获取对象）
         this.cronTriggerDao = ApplicationContextProvider.getBean(TCronTriggerDao.class);
         RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.TEST_TASK.getTaskId());
     }
