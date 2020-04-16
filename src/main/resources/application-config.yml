@@ -1,7 +1,7 @@
 #自定义的配置放这里
 druid-login:
-  userName: root
-  password: root
-  enable: true
+  userName: ${druid_userName:root}
+  password: ${druid_password:root}
+  enable: ${druid_enable:true}
 #  allow: 172.16.5.201,127.0.0.1
-  allow: 172.16.5.201
+  allow: ${druid_allow:172.16.5.201}

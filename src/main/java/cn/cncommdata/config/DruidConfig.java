@@ -42,9 +42,12 @@ public class DruidConfig {
         servletRegistrationBean.setServlet(new StatViewServlet());
         servletRegistrationBean.addUrlMappings("/druid/*");
         Map<String, String> initParameters = new HashMap<>();
-        initParameters.put("loginUsername", druidLoginConfig.getUserName());// 用户名
-        initParameters.put("loginPassword", druidLoginConfig.getPassword());// 密码
-        initParameters.put("resetEnable", "false");// 禁用HTML页面上的“Reset All”功能
+        // 用户名
+        initParameters.put("loginUsername", Optional.ofNullable(druidLoginConfig.getUserName()).orElse("root"));
+        // 密码
+        initParameters.put("loginPassword", Optional.ofNullable(druidLoginConfig.getPassword()).orElse("root"));
+        // 禁用HTML页面上的“Reset All”功能
+        initParameters.put("resetEnable", "false");
         // IP白名单 (没有配置或者为空，则允许所有访问)
         initParameters.put("allow", Optional.ofNullable(druidLoginConfig.getAllow()).orElse(""));
         // IP黑名单 (存在共同时，deny优先于allow)
@@ -57,7 +60,7 @@ public class DruidConfig {
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         //  可以将配置设置为禁用状态。
-        filterRegistrationBean.setEnabled(druidLoginConfig.getEnable());
+        filterRegistrationBean.setEnabled(Optional.ofNullable(druidLoginConfig.getEnable()).orElse(false));
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");

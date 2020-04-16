@@ -19,7 +19,7 @@ class FormDaoImplTest extends ZlSynchronizeApplicationTests {
 
     @Test
     void getFormDataListByFormId() {
-        Long formId = 1240215509488766986L;
+        Long formId = 1240468533985546242L;
         List<FormData> formDatas = formDao.getFormDataListByFormId(formId);
         for (FormData formdata : formDatas) {
             log.info(formdata.toString());
@@ -28,7 +28,7 @@ class FormDaoImplTest extends ZlSynchronizeApplicationTests {
 
     @Test
     void getByFormDataId() {
-        FormData formData = formDao.getByFormDataId(1247403865356242944L, 1218734876489027584L);
+        FormData formData = formDao.getByFormDataId(1240468533985546242L, 1218734876489027584L);
         //强行装逼，没必要.用一下java8的新特性
         formData = Optional.ofNullable(formData).orElse(new FormData());
         log.info("haha: {}", formData.toString());
