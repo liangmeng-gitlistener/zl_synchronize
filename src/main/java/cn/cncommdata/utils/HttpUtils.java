@@ -1,10 +1,12 @@
 package cn.cncommdata.utils;
 
+import cn.cncommdata.config.entity.HttpConfig;
 import cn.cncommdata.enums.SysConstants;
 import cn.hutool.core.map.MapUtil;
-import cn.hutool.http.Header;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import cn.cncommdata.enums.SysConstants.HttpHeaders;
 
 import java.util.Map;
 
@@ -14,13 +16,16 @@ import java.util.Map;
 public class HttpUtils {
 
     /**
-     * TODO:根据实际情况修改http请求头部信息
      * 初始化请求头
+     * @param httpConfig    配置类
      * @return
      */
-    private Map<String, String> initheaderMap (){
+    private static Map<String, String> initHeaderMap(HttpConfig httpConfig){
         Map<String, String> result = MapUtil.newHashMap();
-        result.put(Header.USER_AGENT.toString(), "Hutool http");
+        result.put(HttpHeaders.TENANT_ID.getName(), httpConfig.getHeader().getTenantId());
+        result.put(HttpHeaders.GRANT_ID.getName(), httpConfig.getHeader().getGrantId());
+        result.put(HttpHeaders.ACCESS_TOKEN.getName(), HttpHeaders.ACCESS_TOKEN.getDefaultValue());
+        result.put(HttpHeaders.REFRESH_TOKEN.getName(), HttpHeaders.REFRESH_TOKEN.getDefaultValue());
         return result;
     }
 
@@ -30,11 +35,11 @@ public class HttpUtils {
      * @param paramMap  请求的表单内容
      * @return          页面内容的字符串
      */
-    public String get(String url, Map<String, Object> paramMap){
+    public static String get(String url, Map<String, Object> paramMap, HttpConfig httpConfig){
         //可以单独传入http参数，这样参数会自动做URL编码，拼接在URL中
         HttpResponse res = HttpRequest.get(url)
                 //头信息
-                .headerMap(initheaderMap(), true)
+                .headerMap(initHeaderMap(httpConfig), true)
                 .form(paramMap)
                 .timeout(SysConstants.TimeEnum.HTTP_CONNECTION_TIMEOUT.getTime())
                 .execute();
@@ -46,11 +51,11 @@ public class HttpUtils {
      * @param url       请求的url地址
      * @return          页面内容的字符串
      */
-    public String get(String url){
+    public static String get(String url, HttpConfig httpConfig){
         //可以单独传入http参数，这样参数会自动做URL编码，拼接在URL中
         HttpResponse res = HttpRequest.get(url)
                 //头信息
-                .headerMap(initheaderMap(), true)
+                .headerMap(initHeaderMap(httpConfig), true)
                 .timeout(SysConstants.TimeEnum.HTTP_CONNECTION_TIMEOUT.getTime())
                 .execute();
         return res.body();
@@ -62,11 +67,11 @@ public class HttpUtils {
      * @param paramMap  请求的表单内容
      * @return          页面内容的字符串
      */
-    public String post(String url, Map<String, Object> paramMap){
+    public static String post(String url, Map<String, Object> paramMap, HttpConfig httpConfig){
         //可以单独传入http参数，这样参数会自动做URL编码，拼接在URL中
         HttpResponse res = HttpRequest.post(url)
                 //头信息
-                .headerMap(initheaderMap(), true)
+                .headerMap(initHeaderMap(httpConfig), true)
                 .form(paramMap)
                 .timeout(SysConstants.TimeEnum.HTTP_CONNECTION_TIMEOUT.getTime())
                 .execute();
@@ -79,14 +84,25 @@ public class HttpUtils {
      * @param json      指定请求内容，比如rest请求指定JSON请求体
      * @return          页面内容的字符串
      */
-    public String post(String url, String json){
+    public static String post(String url, String json, HttpConfig httpConfig){
         //可以单独传入http参数，这样参数会自动做URL编码，拼接在URL中
         HttpResponse res = HttpRequest.post(url)
                 //头信息，多个头信息多次调用此方法即可
-                .headerMap(initheaderMap(), true)
+                .headerMap(initHeaderMap(httpConfig), true)
                 .body(json)
                 .timeout(SysConstants.TimeEnum.HTTP_CONNECTION_TIMEOUT.getTime())
                 .execute();
         return res.body();
+    }
+
+    /**
+     * 初始化url请求地址
+     * @param httpConfig        配置类
+     * @param routingAddress    路由地址后缀（举例:/order/progress）
+     * @return
+     */
+    public static String initURL (HttpConfig httpConfig, String routingAddress){
+        return StrUtil.format("http://{}:{}/zlreport{}",
+                httpConfig.getIp(), httpConfig.getPort(), routingAddress);
     }
 }

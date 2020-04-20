@@ -5,3 +5,14 @@ druid-login:
   enable: ${druid_enable:true}
 #  allow: 172.16.5.201,127.0.0.1
   allow: ${druid_allow:172.16.5.201}
+http:
+  ip: ${http_ip:172.16.16.104}
+  port: ${http_port:31359}
+  header:
+    tenantId: ${tenantId:1218734876489027584}
+    grantId: ${grantId:1239814084715745280}
+  orderProgress:
+    formId: ${formId:1240468533985546242}
+    condition: ${condition:{}}
+    pageNumber: ${pageNumber:1}
+    pageSize: ${pageSize:1000}
