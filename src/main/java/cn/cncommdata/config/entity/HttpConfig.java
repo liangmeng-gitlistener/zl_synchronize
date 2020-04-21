@@ -1,5 +1,6 @@
 package cn.cncommdata.config.entity;
 
+import cn.cncommdata.config.entity.http_param.CastOutputConfig;
 import cn.cncommdata.config.entity.http_param.HeaderConfig;
 import cn.cncommdata.config.entity.http_param.OrderProgressConfig;
 import lombok.Data;
@@ -12,6 +13,10 @@ import org.springframework.stereotype.Component;
 public class HttpConfig {
     private String ip;
     private String port;
+    private String pageNumber;
+    private String pageSize;
+
     private HeaderConfig header;
     private OrderProgressConfig orderProgress;
+    private CastOutputConfig castOutput;
 }

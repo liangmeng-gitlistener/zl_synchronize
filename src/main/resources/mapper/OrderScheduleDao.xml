@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cncommdata.dao.OrderScheduleDao">
+
+    <resultMap type="cn.cncommdata.entity.OrderSchedule" id="OrderScheduleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="processProductOrder" column="process_product_order" jdbcType="VARCHAR"/>
+        <result property="productOrderNum" column="product_order_num" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="customer" column="customer" jdbcType="VARCHAR"/>
+        <result property="alloyState" column="alloy_state" jdbcType="VARCHAR"/>
+        <result property="planVolume" column="plan_volume" jdbcType="INTEGER"/>
+        <result property="completedVolume" column="completed_volume" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OrderScheduleMap">
+        select
+          id, process_product_order, product_order_num, product_name, customer, alloy_state, plan_volume, completed_volume, create_time, update_time
+        from test.order_schedule
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrderScheduleMap">
+        select
+          id, process_product_order, product_order_num, product_name, customer, alloy_state, plan_volume, completed_volume, create_time, update_time
+        from test.order_schedule
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="OrderScheduleMap">
+        select
+          id, process_product_order, product_order_num, product_name, customer, alloy_state, plan_volume, completed_volume, create_time, update_time
+        from test.order_schedule
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="processProductOrder != null and processProductOrder != ''">
+                and process_product_order = #{processProductOrder}
+            </if>
+            <if test="productOrderNum != null and productOrderNum != ''">
+                and product_order_num = #{productOrderNum}
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name = #{productName}
+            </if>
+            <if test="customer != null and customer != ''">
+                and customer = #{customer}
+            </if>
+            <if test="alloyState != null and alloyState != ''">
+                and alloy_state = #{alloyState}
+            </if>
+            <if test="planVolume != null">
+                and plan_volume = #{planVolume}
+            </if>
+            <if test="completedVolume != null">
+                and completed_volume = #{completedVolume}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into test.order_schedule(process_product_order, product_order_num, product_name, customer, alloy_state, plan_volume, completed_volume, create_time, update_time)
+        values (#{processProductOrder}, #{productOrderNum}, #{productName}, #{customer}, #{alloyState}, #{planVolume}, #{completedVolume}, #{createTime}, #{updateTime})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test.order_schedule
+        <set>
+            <if test="processProductOrder != null and processProductOrder != ''">
+                process_product_order = #{processProductOrder},
+            </if>
+            <if test="productOrderNum != null and productOrderNum != ''">
+                product_order_num = #{productOrderNum},
+            </if>
+            <if test="productName != null and productName != ''">
+                product_name = #{productName},
+            </if>
+            <if test="customer != null and customer != ''">
+                customer = #{customer},
+            </if>
+            <if test="alloyState != null and alloyState != ''">
+                alloy_state = #{alloyState},
+            </if>
+            <if test="planVolume != null">
+                plan_volume = #{planVolume},
+            </if>
+            <if test="completedVolume != null">
+                completed_volume = #{completedVolume},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test.order_schedule where id = #{id}
+    </delete>
+
+</mapper>

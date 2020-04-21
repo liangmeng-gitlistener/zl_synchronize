@@ -1,6 +1,6 @@
 package cn.cncommdata.runnable.utils;
 
-import cn.cncommdata.dao.mysql.TCronTriggerDao;
+import cn.cncommdata.dao.TCronTriggerDao;
 import cn.cncommdata.enums.TaskEnum;
 import cn.hutool.core.date.DateUtil;
 

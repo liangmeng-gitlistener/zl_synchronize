@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@MapperScan("cn.cncommdata.dao.mysql")
+@MapperScan("cn.cncommdata.dao")
 @EnableScheduling
 public class ZlSynchronizeApplication {
 

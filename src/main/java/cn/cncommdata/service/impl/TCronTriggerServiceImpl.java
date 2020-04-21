@@ -1,7 +1,7 @@
 package cn.cncommdata.service.impl;
 
 import cn.cncommdata.entity.TCronTrigger;
-import cn.cncommdata.dao.mysql.TCronTriggerDao;
+import cn.cncommdata.dao.TCronTriggerDao;
 import cn.cncommdata.service.TCronTriggerService;
 import org.springframework.stereotype.Service;
 

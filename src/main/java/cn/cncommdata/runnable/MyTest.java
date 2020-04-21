@@ -1,6 +1,6 @@
 package cn.cncommdata.runnable;
 
-import cn.cncommdata.dao.mysql.TCronTriggerDao;
+import cn.cncommdata.dao.TCronTriggerDao;
 import cn.cncommdata.enums.TaskEnum;
 import cn.cncommdata.runnable.utils.RunnableUtil;
 import cn.cncommdata.utils.ApplicationContextProvider;

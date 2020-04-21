@@ -3,14 +3,14 @@ server:
 
 spring:
   #mongo配置
-  data:
-    mongodb:
-      host: ${mongodb_host:172.16.16.71}
-      port: ${mongodb_port:37017}
-      username: ${mongodb_username:root}
-      password: ${mongodb_password:123qweQWE,./}
-      authentication-database: ${mongodb_authentication_database:admin}
-      database: ${mongodb_database:form}
+#  data:
+#    mongodb:
+#      host: ${mongodb_host:172.16.16.71}
+#      port: ${mongodb_port:37017}
+#      username: ${mongodb_username:root}
+#      password: ${mongodb_password:123qweQWE,./}
+#      authentication-database: ${mongodb_authentication_database:admin}
+#      database: ${mongodb_database:form}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${mysql_url:10.62.80.7}:${mysql_port:3306}/${mysql_database:test}?useUnicode=true&characterEncoding=UTF-8&useSSL=false

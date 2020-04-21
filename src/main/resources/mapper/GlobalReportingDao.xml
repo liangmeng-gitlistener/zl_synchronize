@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cncommdata.dao.GlobalReportingDao">
+
+    <resultMap type="cn.cncommdata.entity.GlobalReporting" id="GlobalReportingMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="value" column="value" jdbcType="VARCHAR"/>
+        <result property="startLongitude" column="start_longitude" jdbcType="VARCHAR"/>
+        <result property="startLatitude" column="start_latitude" jdbcType="VARCHAR"/>
+        <result property="endLongitude" column="end_longitude" jdbcType="VARCHAR"/>
+        <result property="endLatitude" column="end_latitude" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="GlobalReportingMap">
+        select
+          id, name, value, start_longitude, start_latitude, end_longitude, end_latitude, description
+        from test.global_reporting
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="GlobalReportingMap">
+        select
+          id, name, value, start_longitude, start_latitude, end_longitude, end_latitude, description
+        from test.global_reporting
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="GlobalReportingMap">
+        select
+          id, name, value, start_longitude, start_latitude, end_longitude, end_latitude, description
+        from test.global_reporting
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="value != null and value != ''">
+                and value = #{value}
+            </if>
+            <if test="startLongitude != null and startLongitude != ''">
+                and start_longitude = #{startLongitude}
+            </if>
+            <if test="startLatitude != null and startLatitude != ''">
+                and start_latitude = #{startLatitude}
+            </if>
+            <if test="endLongitude != null and endLongitude != ''">
+                and end_longitude = #{endLongitude}
+            </if>
+            <if test="endLatitude != null and endLatitude != ''">
+                and end_latitude = #{endLatitude}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into test.global_reporting(name, value, start_longitude, start_latitude, end_longitude, end_latitude, description)
+        values (#{name}, #{value}, #{startLongitude}, #{startLatitude}, #{endLongitude}, #{endLatitude}, #{description})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test.global_reporting
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="value != null and value != ''">
+                value = #{value},
+            </if>
+            <if test="startLongitude != null and startLongitude != ''">
+                start_longitude = #{startLongitude},
+            </if>
+            <if test="startLatitude != null and startLatitude != ''">
+                start_latitude = #{startLatitude},
+            </if>
+            <if test="endLongitude != null and endLongitude != ''">
+                end_longitude = #{endLongitude},
+            </if>
+            <if test="endLatitude != null and endLatitude != ''">
+                end_latitude = #{endLatitude},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test.global_reporting where id = #{id}
+    </delete>
+
+</mapper>

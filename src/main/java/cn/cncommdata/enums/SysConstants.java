@@ -54,11 +54,24 @@ public final class SysConstants {
     @AllArgsConstructor
     public enum RoutingURL {
         ORDER_PROGRESS("/order/progress", "订单进度查询的路由地址"),
-        WIP("/data/productionvolumequerysummary", "在制品情况查询汇总"),
-        CAST_OUTPUT("/data/list/zhuzha","铸轧生产产量"),
-        COLD_ROLL_OUTPUT("/data/list/lengzha","冷轧生产产量"),
+        WIP("/data/productionvolumequerysummary", "在制品情况查询汇总的路由地址"),
+        CAST_OUTPUT("/data/list/zhuzha","铸轧生产产量的路由地址"),
+        COLD_ROLL_OUTPUT("/data/list/lengzha","冷轧生产产量的路由地址"),
         ;
         private String url;
+        private String description;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum CastOutputParam {
+        FORM_ID("form_id","1240468533985546252", "表单id"),
+        CONDITION("condition","{}", "查询条件"),
+        PAGE_NUMBER("page_num","1", "页码"),
+        PAGE_SIZE("page_size","1000", "每页显示条数"),
+        ;
+        private String name;
+        private String defaultValue;
         private String description;
     }
 }
