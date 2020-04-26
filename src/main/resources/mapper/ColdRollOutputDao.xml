@@ -4,9 +4,9 @@
 
     <resultMap type="cn.cncommdata.entity.ColdRollOutput" id="ColdRollOutputMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="weight" column="weight" jdbcType="INTEGER"/>
+        <result property="weight" column="weight" jdbcType="NUMERIC"/>
         <result property="alloy" column="alloy" jdbcType="VARCHAR"/>
-        <result property="totalWeight" column="total_weight" jdbcType="INTEGER"/>
+        <result property="totalWeight" column="total_weight" jdbcType="NUMERIC"/>
         <result property="year" column="year" jdbcType="INTEGER"/>
         <result property="month" column="month" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>

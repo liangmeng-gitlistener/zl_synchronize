@@ -1,8 +1,6 @@
 package cn.cncommdata.config.entity;
 
-import cn.cncommdata.config.entity.http_param.CastOutputConfig;
-import cn.cncommdata.config.entity.http_param.HeaderConfig;
-import cn.cncommdata.config.entity.http_param.OrderProgressConfig;
+import cn.cncommdata.config.entity.http_param.*;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -19,4 +17,6 @@ public class HttpConfig {
     private HeaderConfig header;
     private OrderProgressConfig orderProgress;
     private CastOutputConfig castOutput;
+    private ColdRollOutputConfig coldRollOutput;
+    private WIPParamConfig wipParam;
 }

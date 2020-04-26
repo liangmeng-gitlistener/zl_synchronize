@@ -31,6 +31,9 @@ public class OrderProgressUtil {
         String httpBody = HttpUtils.get(url, paramMap, httpConfig);
 
         ScheduleJsonBase bean = JSONUtil.toBean(httpBody, ScheduleJsonBase.class);
+        if (ObjectUtil.isNull(bean.getData())) {
+            return results;
+        }
         List<JsonRows> rows = bean.getData().getRows();
         rows.stream().filter(row -> row.getStatus().equals("ENABLE")).forEach(
                 (row) -> {

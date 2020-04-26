@@ -1,47 +1,42 @@
 package cn.cncommdata.entity;
 
 import cn.hutool.core.util.StrUtil;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
- * (ColdRollOutput)实体类
+ * (WipSummary)实体类
  *
  * @author makejava
- * @since 2020-04-20 15:22:54
+ * @since 2020-04-23 10:18:59
  */
 @Getter
 @Setter
-public class ColdRollOutput implements Serializable {
-    private static final long serialVersionUID = 235124407648265551L;
+public class WipSummary implements Serializable {
+    private static final long serialVersionUID = -39358244615001808L;
     /**
-    * 冷轧产量表id
+    * 在制品汇总表主键
     */
     private Long id;
     /**
-    * 单月单合金产量（T）
+    * 在制品名称
+    */
+    private String wipName;
+    /**
+    * 在制品卷数汇总
+    */
+    private Integer volume;
+    /**
+    * 在制品重量(T)
     */
     private Double weight;
     /**
-    * 合金分类
+    * 扩展字段
     */
-    private String alloy;
-    /**
-    * 月总产量
-    */
-    private Double totalWeight;
-    /**
-    * 当前产量所属年份
-    */
-    private Integer year;
-    /**
-    * 当前产量所属月份
-    */
-    private Integer month;
+    private String extra;
     /**
     * 创建时间
     */
@@ -59,23 +54,20 @@ public class ColdRollOutput implements Serializable {
     public boolean equals(Object o) {
         if(o == this) {
             return true;
-        } else if(!(o instanceof ColdRollOutput)) {
+        } else if(!(o instanceof WipSummary)) {
             return false;
         } else {
-            ColdRollOutput object = (ColdRollOutput) o;
-            if (!StrUtil.equals(alloy, object.getAlloy())) {
+            WipSummary object = (WipSummary) o;
+            if (!StrUtil.equals(wipName, object.getWipName())) {
                 return false;
             }
             if (!weight.equals(object.getWeight())) {
                 return false;
             }
-            if (!totalWeight.equals(object.getTotalWeight())) {
+            if (!volume.equals(object.getVolume())) {
                 return false;
             }
-            if (!year.equals(object.getYear())) {
-                return false;
-            }
-            if (!month.equals(object.getMonth())) {
+            if (!extra.equals(object.getExtra())) {
                 return false;
             }
             return true;
@@ -90,11 +82,11 @@ public class ColdRollOutput implements Serializable {
     public boolean alreadyInDB(Object o) {
         if(o == this) {
             return true;
-        } else if(!(o instanceof ColdRollOutput)) {
+        } else if(!(o instanceof WipSummary)) {
             return false;
         } else {
-            ColdRollOutput object = (ColdRollOutput) o;
-            if (!StrUtil.equals(object.getAlloy(), alloy)) {
+            WipSummary object = (WipSummary) o;
+            if (!StrUtil.equals(object.getWipName(), wipName)) {
                 return false;
             }
             return true;

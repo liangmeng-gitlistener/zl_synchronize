@@ -74,4 +74,49 @@ public final class SysConstants {
         private String defaultValue;
         private String description;
     }
+
+    @Getter
+    @AllArgsConstructor
+    public enum ColdRollOutputParam {
+        FORM_ID("form_id","1240468533985546251", "表单id"),
+        CONDITION("condition","{}", "查询条件"),
+        PAGE_NUMBER("page_num","1", "页码"),
+        PAGE_SIZE("page_size","1000", "每页显示条数"),
+        ;
+        private String name;
+        private String defaultValue;
+        private String description;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum WIPParam {
+        FORM_ID("form_id","1240468533985546249", "表单id"),
+        ;
+        private String name;
+        private String defaultValue;
+        private String description;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum WIPNameEnum {
+        DOUBLE_FOIL_BLANK("double_foil_blank","双零箔坯"),
+        SINGLE_FOIL_BLANK("single_foil_blank","单零箔坯"),
+        COLD_ROLLED_COIL1("cold_rolled_coil1","冷轧卷1"),
+        COLD_ROLLED_COIL2("cold_rolled_coil2","冷轧卷2")
+        ;
+        private String name;
+        private String extra;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public enum WIPStatistics {
+        WEIGHT("weight","重量"),
+        VOLUME("volume","卷数"),
+        ;
+        private String name;
+        private String value;
+    }
 }

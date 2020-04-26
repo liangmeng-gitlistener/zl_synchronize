@@ -1,16 +1,15 @@
 package cn.cncommdata.service;
 
-import cn.cncommdata.entity.CastOutput;
-
+import cn.cncommdata.entity.WipSummary;
 import java.util.List;
 
 /**
- * (CastOutput)表服务接口
+ * (WipSummary)表服务接口
  *
  * @author makejava
- * @since 2020-04-20 15:22:54
+ * @since 2020-04-23 10:18:59
  */
-public interface CastOutputService {
+public interface WipSummaryService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +17,7 @@ public interface CastOutputService {
      * @param id 主键
      * @return 实例对象
      */
-    CastOutput queryById(Long id);
+    WipSummary queryById(Long id);
 
     /**
      * 查询多条数据
@@ -27,23 +26,23 @@ public interface CastOutputService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<CastOutput> queryAllByLimit(int offset, int limit);
+    List<WipSummary> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param castOutput 实例对象
+     * @param wipSummary 实例对象
      * @return 实例对象
      */
-    CastOutput insert(CastOutput castOutput);
+    WipSummary insert(WipSummary wipSummary);
 
     /**
      * 修改数据
      *
-     * @param castOutput 实例对象
+     * @param wipSummary 实例对象
      * @return 实例对象
      */
-    CastOutput update(CastOutput castOutput);
+    WipSummary update(WipSummary wipSummary);
 
     /**
      * 通过主键删除数据

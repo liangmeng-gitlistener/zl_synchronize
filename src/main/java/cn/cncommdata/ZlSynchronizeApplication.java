@@ -9,9 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("cn.cncommdata.dao")
 @EnableScheduling
 public class ZlSynchronizeApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(ZlSynchronizeApplication.class, args);
     }
-
 }

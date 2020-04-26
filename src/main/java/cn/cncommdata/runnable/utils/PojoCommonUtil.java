@@ -1,11 +1,8 @@
 package cn.cncommdata.runnable.utils;
 
-import cn.cncommdata.entity.CastOutput;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class PojoCommonUtil<T> {
     /**

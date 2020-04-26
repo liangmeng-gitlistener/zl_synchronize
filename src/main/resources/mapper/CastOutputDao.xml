@@ -4,9 +4,9 @@
 
     <resultMap type="cn.cncommdata.entity.CastOutput" id="CastOutputMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="weight" column="weight" jdbcType="INTEGER"/>
         <result property="alloy" column="alloy" jdbcType="VARCHAR"/>
-        <result property="totalWeight" column="total_weight" jdbcType="INTEGER"/>
+        <result property="weight" column="weight" jdbcType="NUMERIC"/>
+        <result property="totalWeight" column="total_weight" jdbcType="NUMERIC"/>
         <result property="year" column="year" jdbcType="INTEGER"/>
         <result property="month" column="month" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -16,7 +16,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="CastOutputMap">
         select
-          id, weight, alloy, total_weight, year, month, create_time, update_time
+          id, alloy, weight, total_weight, year, month, create_time, update_time
         from test.cast_output
         where id = #{id}
     </select>
@@ -24,7 +24,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CastOutputMap">
         select
-          id, weight, alloy, total_weight, year, month, create_time, update_time
+          id, alloy, weight, total_weight, year, month, create_time, update_time
         from test.cast_output
         limit #{offset}, #{limit}
     </select>
@@ -32,17 +32,17 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="CastOutputMap">
         select
-          id, weight, alloy, total_weight, year, month, create_time, update_time
+          id, alloy, weight, total_weight, year, month, create_time, update_time
         from test.cast_output
         <where>
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="weight != null">
-                and weight = #{weight}
-            </if>
             <if test="alloy != null and alloy != ''">
                 and alloy = #{alloy}
+            </if>
+            <if test="weight != null">
+                and weight = #{weight}
             </if>
             <if test="totalWeight != null">
                 and total_weight = #{totalWeight}
@@ -64,19 +64,19 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into test.cast_output(weight, alloy, total_weight, year, month, create_time, update_time)
-        values (#{weight}, #{alloy}, #{totalWeight}, #{year}, #{month}, #{createTime}, #{updateTime})
+        insert into test.cast_output(alloy, weight, total_weight, year, month, create_time, update_time)
+        values (#{alloy}, #{weight}, #{totalWeight}, #{year}, #{month}, #{createTime}, #{updateTime})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update test.cast_output
         <set>
-            <if test="weight != null">
-                weight = #{weight},
-            </if>
             <if test="alloy != null and alloy != ''">
                 alloy = #{alloy},
+            </if>
+            <if test="weight != null">
+                weight = #{weight},
             </if>
             <if test="totalWeight != null">
                 total_weight = #{totalWeight},

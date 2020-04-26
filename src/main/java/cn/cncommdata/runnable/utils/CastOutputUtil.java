@@ -8,13 +8,13 @@ import cn.cncommdata.utils.Builder;
 import cn.cncommdata.utils.HttpUtils;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,6 +33,11 @@ public class CastOutputUtil {
         String httpBody = HttpUtils.get(url, paramMap, httpConfig);
 
         OutputJsonBase bean = JSONUtil.toBean(httpBody, OutputJsonBase.class);
+
+        if (ObjectUtil.isNull(bean.getData())) {
+            return results;
+        }
+
         List<Map<String,String>> rows = bean.getData().getRows();
         rows.stream().forEach(
                 (row) -> {
@@ -42,6 +47,7 @@ public class CastOutputUtil {
     }
 
     /**
+     * TODO:condition入参应该加入时间类型的参数（目前未传任何查询条件）
      * 获取订单进度查询的param参数
      * @param httpConfig
      * @return
@@ -61,16 +67,14 @@ public class CastOutputUtil {
      * @return
      */
     private static CastOutput changeMapToCO (Map<String,String> row) {
-        Calendar cal = Calendar.getInstance();
-        DateTime httpDate = DateUtil.parse(row.get("日期"), "yyyy-MM-dd");
-        cal.setTime(httpDate);
+        DateTime httpDate = DateUtil.parse(row.get("日期"), DatePattern.NORM_DATE_PATTERN);
         return Builder.of(CastOutput::new)
-                .with(CastOutput::setWeight, Convert.toInt(row.get("weight")))
+                .with(CastOutput::setWeight, Convert.toDouble(row.get("weight")))
                 .with(CastOutput::setAlloy, row.get("合金分类"))
-                .with(CastOutput::setTotalWeight, Convert.toInt(row.get("total_weight")))
+                .with(CastOutput::setTotalWeight, Convert.toDouble(row.get("total_weight")))
                 .with(CastOutput::setYear, httpDate.year())
                 //  +1 的原因可以看cn.hutool.core.date.Month类
-                .with(CastOutput::setMonth, httpDate.monthEnum().getValue() + 1 )
+                .with(CastOutput::setMonth, httpDate.month() + 1 )
                 .build();
     }
 

@@ -3,36 +3,38 @@ package cn.cncommdata.entity;
 import cn.hutool.core.util.StrUtil;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * (CastOutput)实体类
  *
  * @author makejava
- * @since 2020-04-20 15:22:54
+ * @since 2020-04-23 12:38:45
  */
 @Getter
 @Setter
+@ToString
 public class CastOutput implements Serializable {
-    private static final long serialVersionUID = 813464206187392651L;
+    private static final long serialVersionUID = -31831737993251118L;
     /**
     * 铸轧产量表id
     */
     private Long id;
     /**
-    * 单月单合金产量（T）
-    */
-    private Integer weight;
-    /**
     * 合金分类
     */
     private String alloy;
     /**
+    * 单月单合金产量（T）
+    */
+    private Double weight;
+    /**
     * 月总产量
     */
-    private Integer totalWeight;
+    private Double totalWeight;
     /**
     * 当前产量所属年份
     */
