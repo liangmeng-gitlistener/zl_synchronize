@@ -18,9 +18,9 @@ http:
     condition: ${condition:{}}
   castOutput:
     formId: ${formId2:1240468533985546252}
-    condition: ${condition2:{}}
+#    condition: ${condition2:{}}
   coldRollOutput:
     formId: ${formId3:1240468533985546251}
-    condition: ${condition3:{}}
+#    condition: ${condition3:{}}
   wipParam:
     formId: ${formId4:1240468533985546249}

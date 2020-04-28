@@ -47,6 +47,6 @@ public class OrderProgressTask implements Runnable {
         });
 
         //  反写数据库执行时间
-        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.TEST_TASK.getTaskId());
+        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.ORDER_PROGRESS_TASK);
     }
 }

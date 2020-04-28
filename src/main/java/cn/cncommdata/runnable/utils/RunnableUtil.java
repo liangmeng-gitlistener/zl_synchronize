@@ -10,7 +10,7 @@ public class RunnableUtil {
      * @param cronTriggerDao    定时任务dao
      * @param taskId            定时任务ID
      */
-    public static int UpdateLastRunTime(TCronTriggerDao cronTriggerDao, Long taskId){
-        return cronTriggerDao.updateLastRunTimeById(DateUtil.date(), TaskEnum.TEST_TASK.getTaskId());
+    public static int UpdateLastRunTime(TCronTriggerDao cronTriggerDao, TaskEnum task){
+        return cronTriggerDao.updateLastRunTimeById(DateUtil.date(), task.getTaskId());
     }
 }

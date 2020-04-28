@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class CastOutputConfig {
     private String formId;
-    private String condition;
 }

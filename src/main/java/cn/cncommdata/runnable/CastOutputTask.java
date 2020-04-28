@@ -56,6 +56,6 @@ public class CastOutputTask implements Runnable {
         });
 
         //  反写数据库执行时间
-        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.TEST_TASK.getTaskId());
+        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.CAST_OUTPUT_TASK);
     }
 }

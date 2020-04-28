@@ -18,7 +18,6 @@ import cn.cncommdata.runnable.utils.WIPSummaryUtil;
 import cn.cncommdata.utils.ApplicationContextProvider;
 import cn.cncommdata.utils.Builder;
 import cn.cncommdata.utils.HttpUtils;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -51,7 +50,7 @@ class HttpTest extends ZlSynchronizeApplicationTests {
      */
     @Test
     void CastOutput(){
-        Map<String, Object> paramMap = CastOutputUtil.getparamMap(httpConfig);
+        Map<String, Object> paramMap = CastOutputUtil.getParamMap(httpConfig);
         String url = HttpUtils.initURL(httpConfig, SysConstants.RoutingURL.CAST_OUTPUT.getUrl());
         String result = HttpUtils.get(url, paramMap, httpConfig);
 
@@ -204,6 +203,7 @@ class HttpTest extends ZlSynchronizeApplicationTests {
 
     @Test
     void myTest() {
-        log.info(StrUtil.contains("冷轧1中重量","重量") + "");
+        Map<String, Object> result = CastOutputUtil.getParamMap(httpConfig);
+        log.info(result.toString());
     }
 }

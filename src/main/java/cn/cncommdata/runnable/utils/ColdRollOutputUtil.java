@@ -13,6 +13,8 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
 import java.util.Collection;
@@ -90,7 +92,6 @@ public class ColdRollOutputUtil {
     }
 
     /**
-     * TODO:condition入参应该加入时间类型的参数（目前未传任何查询条件）
      * 获取订单进度查询的param参数
      * @param httpConfig
      * @return
@@ -98,7 +99,11 @@ public class ColdRollOutputUtil {
     public static Map<String, Object> getparamMap(HttpConfig httpConfig){
         Map<String, Object> paramMap = MapUtil.newHashMap();
         paramMap.put(SysConstants.ColdRollOutputParam.FORM_ID.getName(), httpConfig.getColdRollOutput().getFormId());
-        paramMap.put(SysConstants.ColdRollOutputParam.CONDITION.getName(), httpConfig.getColdRollOutput().getCondition());
+        JSONObject conditionJson = JSONUtil.createObj()
+                .set("select_month", DateUtil.format(DateTime.now(),"yyyy-M"))
+                .set("classification_type", "");
+        paramMap.put(SysConstants.ColdRollOutputParam.CONDITION.getName(),
+                JSONUtil.toJsonPrettyStr(conditionJson));
         paramMap.put(SysConstants.ColdRollOutputParam.PAGE_NUMBER.getName(), httpConfig.getPageNumber());
         paramMap.put(SysConstants.ColdRollOutputParam.PAGE_SIZE.getName(), httpConfig.getPageSize());
         return paramMap;
@@ -110,14 +115,20 @@ public class ColdRollOutputUtil {
      * @return
      */
     private static ColdRollOutput changeMapToCRO (Map<String,String> row) {
-        DateTime httpDate = DateUtil.parse(row.get("日期"), DatePattern.NORM_DATE_PATTERN);
+        //  2020-04-27  根据http请求结果的修改情况
+        String[] dates = StrUtil.split(row.get("日期"), "-");
+        if (dates.length != 2) {
+            throw new RuntimeException("http请求返回结果不符合预期");
+        }
+        DateTime startTime = DateUtil.date(Convert.toLong(dates[0]));
+        //  END
         return Builder.of(ColdRollOutput::new)
                 .with(ColdRollOutput::setWeight, Convert.toDouble(row.get("weight")))
                 .with(ColdRollOutput::setAlloy, row.get("合金分类"))
                 .with(ColdRollOutput::setTotalWeight, Convert.toDouble(row.get("total_weight")))
-                .with(ColdRollOutput::setYear, httpDate.year())
+                .with(ColdRollOutput::setYear, startTime.year())
                 //  +1 的原因可以看cn.hutool.core.date.Month类
-                .with(ColdRollOutput::setMonth, httpDate.month() + 1 )
+                .with(ColdRollOutput::setMonth, startTime.month() + 1 )
                 .build();
     }
 }

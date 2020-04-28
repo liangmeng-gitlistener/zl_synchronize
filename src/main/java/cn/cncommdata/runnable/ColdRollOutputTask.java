@@ -56,6 +56,6 @@ public class ColdRollOutputTask implements Runnable {
         });
 
         //  反写数据库执行时间
-        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.TEST_TASK.getTaskId());
+        RunnableUtil.UpdateLastRunTime(cronTriggerDao, TaskEnum.COLD_ROLL_OUTPUT_TASK);
     }
 }

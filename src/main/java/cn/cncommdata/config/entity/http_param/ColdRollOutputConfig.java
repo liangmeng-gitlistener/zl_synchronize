@@ -5,5 +5,4 @@ import lombok.Data;
 @Data
 public class ColdRollOutputConfig {
     private String formId;
-    private String condition;
 }
