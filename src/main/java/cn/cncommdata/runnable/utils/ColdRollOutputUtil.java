@@ -35,8 +35,7 @@ public class ColdRollOutputUtil {
             return results;
         }
         List<Map<String,String>> rows = bean.getData().getRows();
-        rows.stream().forEach(
-                (row) -> {
+        rows.stream().forEach(row -> {
                     results.add(changeMapToCRO(row));
                 });
         return results;
@@ -49,7 +48,7 @@ public class ColdRollOutputUtil {
      * @return
      */
     public static Collection<ColdRollOutput> getSameList(List<ColdRollOutput> httpList, List<ColdRollOutput> dbList) {
-        return new PojoCommonUtil().getSameList(httpList, dbList);
+        return RunnableUtil.getSameList(httpList, dbList);
     }
 
     public static List<ColdRollOutput> needInsert(List<ColdRollOutput> httpList, List<ColdRollOutput> dbList) {

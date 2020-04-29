@@ -80,6 +80,7 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
+        <!-- 对java工程实时监控方式很多，本文主要讲在springboot框架中的监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -130,6 +131,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>

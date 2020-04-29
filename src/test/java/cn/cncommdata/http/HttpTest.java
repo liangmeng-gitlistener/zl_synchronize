@@ -125,8 +125,12 @@ class HttpTest extends ZlSynchronizeApplicationTests {
 
         List<CastOutput> httpList = CastOutputUtil.getFromHTTP(httpConfig);
         List<CastOutput> dbList = castOutputDao.queryAll(null);
+
+//        httpList.add(Builder.of(CastOutput::new).with(CastOutput::setId, 10086L).build());
+
         //  提前过滤http请求与db完全相同的数据（此处会改变httpList的值，代码顺序不能调整）
-        httpList.removeAll(CastOutputUtil.getSameList(httpList, dbList));
+        List<CastOutput> list = CastOutputUtil.getSameList(httpList, dbList);
+        httpList.removeAll(list);
 
         List<CastOutput> needInserts = CastOutputUtil.needInsert(httpList, dbList);
         //  由于实际需要更新的数据一定不是需要插入的数据，此处为提高性能而做的处理。（此处会改变httpList的值，代码顺序不能调整）

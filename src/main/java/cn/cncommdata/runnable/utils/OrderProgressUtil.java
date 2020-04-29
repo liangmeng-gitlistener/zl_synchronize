@@ -35,8 +35,8 @@ public class OrderProgressUtil {
             return results;
         }
         List<JsonRows> rows = bean.getData().getRows();
-        rows.stream().filter(row -> row.getStatus().equals("ENABLE")).forEach(
-                (row) -> {
+        rows.stream().filter(row -> row.getStatus().equals("ENABLE"))
+                .forEach(row -> {
                     results.add(changeJRToOS(row));
                 });
         return results;
@@ -131,6 +131,6 @@ public class OrderProgressUtil {
      * @return
      */
     public static List<OrderSchedule> getSameList(List<OrderSchedule> httpList, List<OrderSchedule> dbList){
-        return new PojoCommonUtil().getSameList(httpList, dbList);
+        return RunnableUtil.getSameList(httpList, dbList);
     }
 }

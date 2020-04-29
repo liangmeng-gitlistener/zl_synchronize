@@ -27,7 +27,6 @@ public class CastOutputUtil {
      * @return
      */
     public static List<CastOutput> getFromHTTP(HttpConfig httpConfig){
-        List<CastOutput> results = CollUtil.newArrayList();
         Map<String, Object> paramMap = getParamMap(httpConfig);
 
         String url = HttpUtils.initURL(httpConfig, SysConstants.RoutingURL.CAST_OUTPUT.getUrl());
@@ -36,14 +35,12 @@ public class CastOutputUtil {
         OutputJsonBase bean = JSONUtil.toBean(httpBody, OutputJsonBase.class);
 
         if (ObjectUtil.isNull(bean.getData())) {
-            return results;
+            return CollUtil.newArrayList();
         }
 
         List<Map<String,String>> rows = bean.getData().getRows();
-        rows.stream().forEach(
-                (row) -> {
-                    results.add(changeMapToCO(row));
-                });
+        List<CastOutput> results = rows.stream().map(row -> changeMapToCO(row))
+                .collect(Collectors.toList());
         return results;
     }
 
@@ -149,6 +146,6 @@ public class CastOutputUtil {
      * @return
      */
     public static List<CastOutput> getSameList(List<CastOutput> httpList, List<CastOutput> dbList){
-        return new PojoCommonUtil().getSameList(httpList, dbList);
+        return RunnableUtil.getSameList(httpList, dbList);
     }
 }
