@@ -26,20 +26,13 @@ public class RunnableUtil {
      */
     public static <T> List<T> getSameList(List<T> httpList, List<T> dbList){
         List<T> result = CollUtil.newArrayList();
+        //  为加深对流式编程的理解自己写的方法，一般复杂的不会使用这种写法
         httpList.stream().forEach(
                 http -> {
                     CollUtil.addAllIfNotContains(result,
                             dbList.stream().filter(http::equals)
                                     .collect(Collectors.toList()));
                 });
-//        为加深对流式编程的理解自己写的方法，一般复杂的不会使用这种写法
-//        for (T http : httpList) {
-//            for (T db : dbList) {
-//                if (http.equals(db)) {
-//                    result.add(http);
-//                }
-//            }
-//        }
         return result;
     }
 }

@@ -124,18 +124,29 @@ public class CastOutputUtil {
         if (CollUtil.isEmpty(httpList)) {
             return CollUtil.newArrayList();
         }
-        List<CastOutput> result = CollUtil.newArrayList();
-        for (CastOutput http : httpList) {
-            for (CastOutput db : dbList) {
+//        List<CastOutput> result = CollUtil.newArrayList();
+//        for (CastOutput http : httpList) {
+//            for (CastOutput db : dbList) {
+//                if (http.alreadyInDB(db)) {
+//                    if (!http.equals(db)) {
+//                        http.setId(db.getId());
+//                        http.setUpdateTime(DateUtil.date());
+//                        result.add(http);
+//                    }
+//                }
+//            }
+//        }
+        List<CastOutput> result = httpList.stream().map(http -> {
+            dbList.forEach(db -> {
                 if (http.alreadyInDB(db)) {
                     if (!http.equals(db)) {
                         http.setId(db.getId());
                         http.setUpdateTime(DateUtil.date());
-                        result.add(http);
                     }
                 }
-            }
-        }
+            });
+            return http;
+        }).collect(Collectors.toList());
         return result;
     }
 
