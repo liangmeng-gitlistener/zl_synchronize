@@ -13,7 +13,7 @@ spring:
 #      database: ${mongodb_database:form}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${mysql_url:10.62.80.7}:${mysql_port:3306}/${mysql_database:test}?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://${mysql_url:127.0.0.1}:${mysql_port:3306}/${mysql_database:test}?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: ${mysql_username:root}
     password: ${mysql_password:root}
     type: com.alibaba.druid.pool.DruidDataSource

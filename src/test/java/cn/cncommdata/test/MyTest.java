@@ -4,14 +4,19 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.extra.qrcode.QrCodeUtil;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * 购物车测试类
  */
+@Slf4j
 public class MyTest {
     @Test
     void test1(){
@@ -42,5 +47,19 @@ public class MyTest {
     static class Product{
         private Double price;
         private Integer quantity;
+    }
+
+    @Test
+    void test2(){
+        String str = "2020-05-29 11:18:11";
+        Timestamp time = Timestamp.valueOf(str);
+        Long timeLong = time.getTime();
+        log.info(timeLong.toString());
+    }
+    @Test
+    void test3(){
+        Date time = new Date();
+        String strn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
+        log.info(strn);
     }
 }
